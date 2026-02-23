@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Book Collection Manager</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <header class="topbar">
+    <div class="brand">
+      <h1>Book Collection</h1>
+      <p class="sub">XAMPP local now → deploy later</p>
+    </div>
+
+    <nav class="tabs">
+      <button id="tabList" class="tab active">List</button>
+      <button id="tabStats" class="tab">Stats</button>
+    </nav>
+  </header>
+
+  <main class="container">
+    <!-- LIST VIEW -->
+    <section id="listView" class="view">
+      <div class="controls">
+        <div class="control-group">
+          <label for="genreFilter">Filter by genre</label>
+          <select id="genreFilter">
+            <option value="all">All</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+          <label for="pageSize">Page size</label>
+          <select id="pageSize">
+            <option>5</option>
+            <option selected>10</option>
+            <option>25</option>
+            <option>50</option>
+          </select>
+        </div>
+
+        <div class="control-group">
+        <label for="sortBy">Sort by</label>
+        <select id="sortBy">
+            <option value="id">ID</option>
+            <option value="name">Name</option>
+            <option value="pub_date">Date</option>
+            <option value="genre">Genre</option>
+            <option value="author">Author</option>
+        </select>
+        </div>
+
+        <div class="control-group">
+        <label for="sortDir">Direction</label>
+        <select id="sortDir">
+            <option value="asc">Ascending</option>
+            <option value="desc" selected>Descending</option>
+        </select>
+        </div>
+
+        <div class="control-group grow">
+          <button id="btnRefresh" class="btn">Refresh</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>Add Book</h2>
+        <form id="createForm" class="form-grid">
+        <input type="hidden" id="editId" value="" />
+
+        <input id="name" placeholder="Name" required />
+        <input id="date" placeholder="Date (YYYY-MM-DD)" />
+        <input id="genre" placeholder="Genre" required />
+        <input id="author" placeholder="Author" required />
+        <input id="image_url" placeholder="Image URL" required />
+
+        <button id="submitBtn" class="btn primary" type="submit">Add</button>
+        <button id="cancelEditBtn" class="btn" type="button" style="display:none;">Cancel</button>
+        </form>
+        <p id="formModeHint" class="hint">Mode: Adding</p>
+      </div>
+
+      <div class="card">
+        <div class="list-header">
+          <h2>Books</h2>
+          <div id="meta" class="meta"></div>
+        </div>
+
+        <div class="table-wrap">
+          <table class="table">
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Cover</th>
+                <th>Name</th>
+                <th>Date</th>
+                <th>Genre</th>
+                <th>Author</th>
+                <th class="actions">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
+
+        <div class="pager">
+          <button id="prev" class="btn">Prev</button>
+          <div id="pageIndicator" class="page-indicator"></div>
+          <button id="next" class="btn">Next</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- STATS VIEW -->
+    <section id="statsView" class="view hidden">
+      <div class="card">
+        <h2>Stats</h2>
+        <div class="stats-grid">
+        <div class="stat">
+            <div class="stat-label">Total records</div>
+            <div id="statTotal" class="stat-value">—</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Most popular genre</div>
+            <div id="statGenre" class="stat-value">—</div>
+            <div id="statGenreCount" class="stat-sub">—</div>
+        </div>
+
+        <div class="stat">
+            <div class="stat-label">Current page size</div>
+            <div id="statPageSize" class="stat-value">—</div>
+        </div>
+        </div>
+        <button id="btnReloadStats" class="btn">Reload Stats</button>
+      </div>
+    </section>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
